@@ -274,7 +274,7 @@ define(['exports',
           /** Go through all the assignments and set their Google ID
             */
           for (x in nb.bundles) {
-            workers.push(nb.bundles[x].owner);
+            workers.push(nb.bundles[x].owner.toLowerCase());
             nb.bundles[x].gid = res_ids.ids[parseInt(x) + 1];
           }
 
@@ -308,7 +308,7 @@ define(['exports',
 
           /** Add wirter permission for the user.
             */
-          return gdapi.file_inserPermission(nb['gid'], nb.owner, 'user', 'writer', false);
+          return gdapi.file_inserPermission(nb['gid'], nb.owner, 'anyone', 'writer', false);
         }).then(function(){
           mlog(logs, 'Inserting shared.txt');
 
@@ -345,11 +345,13 @@ define(['exports',
               "- Add the folder containing this task (IPython notebook) to your Google Drive by clicking the 'Open' button below and then 'Add to Drive' \n "+
               "- Then go to http://pycard.ifi.uzh.ch:8888/master to view the project details and see which task is assigned to you. \n"
 
-              mpromises.push(gdapi.file_inserPermission(nb.gid, workers_unique[l], 'user', 'reader', true, email_message));
-              mpromises.push(gdapi.file_inserPermission(nb.variablesid, workers_unique[l], 'user', 'writer', false));
+              mpromises.push(gdapi.file_inserPermission(nb.gid, workers_unique[l], 'anyone', 'reader', true, email_message));
+              mpromises.push(gdapi.file_inserPermission(nb.variablesid, workers_unique[l], 'anyone', 'writer', false));
             }
           }
-
+          return Promise.all(mpromises);
+        }).then(function(){
+          var npromises = [];
           for (j in nb.bundles){
 
             mlog(logs, 'Setting writer permission for ' + nb.bundles[j].owner + ' for ' + j + '_' +'notebook.ipynb');
@@ -359,13 +361,13 @@ define(['exports',
             //mlog(logs, 'Owner: ' + nb.owner);
             //mlog(logs, 'Worker: ' + workers[j]);
 
-            mpromises.push(gdapi.file_inserPermission(nb.bundles[j].gid, nb.bundles[j].owner, 'user', 'writer', false));
+            npromises.push(gdapi.file_inserPermission(nb.bundles[j].gid, nb.bundles[j].owner, 'anyone', 'writer', false));
 
           }
 
 
 
-          return Promise.all(mpromises);
+          return Promise.all(npromises);
         }).then(function(){
           mlog(logs, 'Storing project in Mongo DB');
 
