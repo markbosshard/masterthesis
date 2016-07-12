@@ -2,11 +2,12 @@
 require([
   "nbextensions/ma/client/common/js/helper",
   "nbextensions/ma/client/common/js/googledrive/gdapi",
+  "nbextensions/ma/client/common/js/gmail/gmailapi",
   'services/config',
   'base/js/utils'
-], function(helper, gdapi, configmod, utils) {
+], function(helper, gdapi, gmailapi, configmod, utils) {
 
-  var SERVER_URL = 'pycard.ifi.uzh.ch:8888'
+  var SERVER_URL = 'localhost:8888'
 
   /*
    * Get user information using the google drive api
@@ -166,7 +167,10 @@ require([
     console.log("Returned " + result.action);
 
     if (result.action == 'add') {
-      sideComments.insertComment(result.data);
+      var comment = result.data;
+      sideComments.insertComment(comment);
+      // Inform the bundle-owner of the new comment.
+      gmailapi.send_mail(IPython.notebook.metadata['bundle-owner'], 'New comment on notebook from '+comment.authorName, 'A new command has been written:\r\n\r\n'+comment.comment+'\r\n\r\nOpen the following notebook to read: '+document.URL);
     }
     if (result.action == 'delete') {
       sideComments.removeComment(result.data.sectionId, result.data._id);
