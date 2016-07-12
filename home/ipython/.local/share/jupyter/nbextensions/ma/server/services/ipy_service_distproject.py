@@ -69,6 +69,7 @@ class DistProjectHandler(IPythonHandler):
     # GET requests
     def get(self,prid=None):
         # Get username. We will retrieve only the requests where the user is involved
+        # TODO: That is not true
         username = self.get_argument('username')
         if username:
             if prid:
@@ -155,6 +156,8 @@ class DistProjectHandler(IPythonHandler):
                 nb['metadata']['variablesid'] = json_data['variablesid']
                 # Set Google ID for this notebook
                 nb['metadata']['id'] = x['gid']
+                # Set the worker assigned to this task
+                nb['metadata']['bundle-owner'] = x['owner']
 
                 # Go through all the actions in the assignment
                 for a in x['actions']:
