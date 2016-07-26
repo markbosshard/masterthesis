@@ -176,6 +176,17 @@ class DistProjectHandler(IPythonHandler):
                     desc['metadata'].run_control['read_only'] = True
                     nb['cells'].append(desc)
 
+                    # Create a cell for logging the work
+                    log_text = '# Log and description \n' \
+                               'Please record here all information needed to reproduce and understand your work: \n' \
+                               '- Algorithms used\n' \
+                               '- Things tried but discarded\n' \
+                               '- Explanation **why** you have solved the problem the way you solved it.\n'
+
+                    # Add the description cell as a markdown cell, set it read-only
+                    log_desc = nbfv4.new_markdown_cell(log_text)
+                    nb['cells'].append(log_desc)
+
                     # Create the cell code for this action
                     code_cell = nbfv4.new_code_cell(code)
                     code_cell['metadata'].side_comments = dict()
