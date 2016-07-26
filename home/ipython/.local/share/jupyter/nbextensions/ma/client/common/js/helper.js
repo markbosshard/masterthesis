@@ -297,9 +297,9 @@ define(['exports',
         }).then(function(convert){
           nb = convert;
           mlog(logs, 'Conversion complete.');
-          mlog(logs, 'Creating project folder it not exits');
+          mlog(logs, 'Creating project folder if not exits');
 
-          /** Create forlder project in Google Drive
+          /** Create folder for project in Google Drive
             */
 
           return gdapi.file_create_if_not_exists(nb.gid, 'root', 'application/vnd.google-apps.folder', nb.gid)
