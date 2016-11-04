@@ -280,7 +280,7 @@ require([
           for (x in data['items']){
             var astr = $('<span class="activity"></span>').append(
               data['items'][x]['user']+ " " +
-              data['items'][x]['type']+"ed" + " " +
+              data['items'][x]['type']+(data['items'][x]['type'].match("e$")=="e"? "d" : "ed") + " " +
               builder.project.getActObjIcon(data['items'][x]['obj_type']) + " " +
               "<strong>" + data['items'][x]['obj_value'] +"</strong>" + "  -  " +
               data['items'][x]['time'] + " min ago."
