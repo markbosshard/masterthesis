@@ -341,9 +341,11 @@ define(['exports',
                 */
               var email_message = "A "+nb['kernel']+"-project "+nb['name']+" was created by " + nb['owner'] +" and a task was assigned to you. The task(s) " +
               "are represented in IPython as " + "notebook.ipynb files."+ " \n \n" +
-              "Perform following steps in order: \n"+
+              "Perform following steps in order to participate: \n"+
               "- Add the folder containing this task (IPython notebook) to your Google Drive by clicking the 'Open' button below and then 'Add to Drive' \n "+
-              "- Then go to http://pycard.ifi.uzh.ch:8888/master to view the project details and see which task is assigned to you. \n"
+              "- Go to https://pycard.ifi.uzh.ch:9999/master, enter the password 'Data2Work' to view the project details and see which task is assigned to you. \n"+
+              "- Go to https://pycard.ifi.uzh.ch:9999/phpbb and register for an account to participate in the discussions. \n"
+
 
               mpromises.push(gdapi.file_inserPermission(nb.gid, workers_unique[l], 'anyone', 'reader', true, email_message));
               mpromises.push(gdapi.file_inserPermission(nb.variablesid, workers_unique[l], 'anyone', 'writer', false));
