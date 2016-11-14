@@ -30,17 +30,24 @@ define([
         };
 
         var setIcon = function () {
-            if (isMergeReady) {
-                $("#merge_ready").removeClass("btn-default").addClass("btn-success");
-            } else {
-                $("#merge_ready").removeClass("btn-success").addClass("btn-default");
-            }
+             if (isMergeReady) {
+                 $("#merge_ready").removeClass("btn-default").addClass("btn-success");
+             } else {
+                 $("#merge_ready").removeClass("btn-success").addClass("btn-default");
+             }
         };
+
+        var count = 50;
 
         var initToggleIcon = function () {
             if (!IPython.notebook.metadata.pgid || !IPython.notebook.metadata.id) {//we want it to match
-                setTimeout(initToggleIcon, 50);//wait 50 millisecnds then recheck
-                return;
+		if(count-- > 0) {
+                  setTimeout(initToggleIcon, 100);//wait n millisecnds then recheck
+                  return;
+                } else {
+ 			$('#merge_ready').hide();
+			return;
+                }
             }
             loadToggleIcon();
         };

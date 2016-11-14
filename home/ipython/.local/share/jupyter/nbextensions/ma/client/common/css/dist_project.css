@@ -489,6 +489,7 @@ div.proverview {
   height: 100%;
   background: #fff;
   display: block;
+  float: left;
   overflow: scroll;
   border-radius: 5px;
   color: @base2;
@@ -715,6 +716,11 @@ div.proverview {
   background: white;
   margin: 0 1%;
 }
+
+.pr {
+  width: 80%;
+}
+
 .master .content .mining-step .project_item {
   background: fade(@base-green, 90%);
   padding: 10px;

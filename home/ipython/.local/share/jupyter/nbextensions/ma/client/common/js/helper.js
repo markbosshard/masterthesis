@@ -308,7 +308,7 @@ define(['exports',
 
           /** Add wirter permission for the user.
             */
-          return gdapi.file_inserPermission(nb['gid'], nb.owner, 'anyone', 'writer', false);
+          return gdapi.file_inserPermission(nb['gid'], nb.owner, 'user', 'writer', false);
         }).then(function(){
           mlog(logs, 'Inserting shared.txt');
 
@@ -343,12 +343,11 @@ define(['exports',
               "are represented in IPython as " + "notebook.ipynb files."+ " \n \n" +
               "Perform following steps in order to participate: \n"+
               "- Add the folder containing this task (IPython notebook) to your Google Drive by clicking the 'Open' button below and then 'Add to Drive' \n "+
-              "- Go to https://pycard.ifi.uzh.ch:9999/master, enter the password 'Data2Work' to view the project details and see which task is assigned to you. \n"+
-              "- Go to https://pycard.ifi.uzh.ch:9999/phpbb and register for an account to participate in the discussions. \n"
+              "- Go to https://www.syncic.com:8989/master, enter the password 'Data2Work' to view the project details and see which task is assigned to you. \n"+
+              "- Go to https://www.syncic.com/phpbb and register for an account to participate in the discussions. \n"
 
-
-              mpromises.push(gdapi.file_inserPermission(nb.gid, workers_unique[l], 'anyone', 'reader', true, email_message));
-              mpromises.push(gdapi.file_inserPermission(nb.variablesid, workers_unique[l], 'anyone', 'writer', false));
+              mpromises.push(gdapi.file_inserPermission(nb.gid, workers_unique[l], 'user', 'reader', true, email_message));
+              mpromises.push(gdapi.file_inserPermission(nb.variablesid, workers_unique[l], 'user', 'writer', false));
             }
           }
           return Promise.all(mpromises);

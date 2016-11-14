@@ -113,7 +113,7 @@ class DistProjectHandler(IPythonHandler):
                 common_description ='#### Temporary folder \n' \
                                     'Set your working dir to following folder '+ json_data['gid']+'. Upload your csv/data files into '\
                                     'this directoy to use them.<br/>'\
-                                    '`ftp://pycard.ifi.uzh.ch/data/'+json_data['gid']+'`'\
+                                    '`ftp://www.syncic.com/data/'+json_data['gid']+'`'\
                                     '<br/><br/>'\
                                     'Use with R Kernel <br/>' \
                                     '`setwd("./'+ json_data['gid']+'")` <br/><br/>' \
@@ -122,8 +122,9 @@ class DistProjectHandler(IPythonHandler):
                                     '`os.chdir("./'+ json_data['gid']+'")` \n' \
                                     '___ \n' \
                                     '#### Notes board \n' \
+                                    'Please register for an account on the discussion board to ask questions and discuss the task: https://www.syncic.com/phpbb <br/><br/>' \
                                     'In order to avoid conflicts between notebooks and have a clean transition from one step to another, use the shared notes file ' \
-                                    'shared.txt . The contents of the file will be loaded and made in every notebook, so it is a good place to register variable names used in the different steps, or to provide feedback after each iteration.  <br/><br/>'
+                                    'shared.txt. The contents of the file will be loaded and made in every notebook, so it is a good place to register variable names used in the different steps, or to provide feedback after each iteration.  <br/><br/>'
                 # Add the task_description as a markdown cell
                 heading = nbfv4.new_markdown_cell(task_description)
                 # Set the task_description as read-only
